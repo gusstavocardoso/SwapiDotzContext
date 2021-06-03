@@ -1,0 +1,160 @@
+{
+	"info": {
+		"_postman_id": "1424d78f-13f0-44a5-9538-5afbacc879fc",
+		"name": "SWAPI [Dotz]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[GET] Films  - Status 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Deve retornar status code 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Deve validar o valor da propriedade title\", function () {\r",
+							"    pm.expect(jsonData.results[0].title).to.eq(\"A New Hope\");\r",
+							"    pm.expect(jsonData.results[1].title).to.eq(\"The Empire Strikes Back\");\r",
+							"    pm.expect(jsonData.results[2].title).to.eq(\"Return of the Jedi\");\r",
+							"    pm.expect(jsonData.results[3].title).to.eq(\"The Phantom Menace\");\r",
+							"    pm.expect(jsonData.results[4].title).to.eq(\"Attack of the Clones\");\r",
+							"    pm.expect(jsonData.results[5].title).to.eq(\"Revenge of the Sith\");\r",
+							"});\r",
+							"\r",
+							"console.log(pm.response.status)\r",
+							"console.log(pm.response.code)\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/films",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"films"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[GET] Planets - Status 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Deve retornar status code 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Deve validar a propriedade counts\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"results\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Deve validar o valor da propriedade counts\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.count).to.eql(60);\r",
+							"});\r",
+							"\r",
+							"console.log(pm.response.status)\r",
+							"console.log(pm.response.code)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/planets/",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"planets",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[GET] Planets  - Status 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Deve retornar status code 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"console.log(pm.response.status)\r",
+							"console.log(pm.response.code)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/planets/61",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"planets",
+						"61"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "urlBase",
+			"value": ""
+		}
+	]
+}
